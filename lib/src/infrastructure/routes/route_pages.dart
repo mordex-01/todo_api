@@ -15,12 +15,12 @@ class RoutePages {
       binding: HomeBinding(),
       children: [
         GetPage(
-          name: RouteNames.addPageRoute,
+          name: "${RouteNames.homePageRoute}${RouteNames.addPageRoute}",
           page: () => const AddPage(),
           binding: Addbinding(),
         ),
         GetPage(
-          name: RouteNames.editPageRoute,
+          name: "${RouteNames.homePageRoute}${RouteNames.editPageRoute}",
           page: () => const EditPage(),
           binding: EditBinding(),
         ),
