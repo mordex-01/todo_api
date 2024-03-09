@@ -1,5 +1,6 @@
 class TodoModel {
-  final String id, userId;
+  final String id;
+  final String userId;
   final String title;
   final String description;
   final bool completed;
@@ -11,10 +12,10 @@ class TodoModel {
     required this.completed,
   });
   factory TodoModel.fromJson(final Map<String, dynamic> json) => TodoModel(
-        id: json['id'],
-        userId: json['userId'],
-        title: json['title'],
-        description: json['description'],
-        completed: json['completed'],
+        id: json['id'] ?? "null",
+        userId: json['userId'] ?? "null",
+        title: json['title'] ?? "null",
+        description: json['description'] ?? "null",
+        completed: json['completed'] ?? false,
       );
 }

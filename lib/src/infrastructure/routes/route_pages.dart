@@ -8,19 +8,19 @@ import 'package:todo_api/src/pages/home/common/home_binding.dart';
 import 'package:todo_api/src/pages/home/view/home_page.dart';
 
 class RoutePages {
-  static List<GetPage> getPages = [
+  static List<GetPage<dynamic>>? getPages = [
     GetPage(
-      name: RouteNames.homePageRoute,
+      name: RouteNamess.homePageRoute,
       page: () => const HomePage(),
       binding: HomeBinding(),
       children: [
         GetPage(
-          name: "${RouteNames.homePageRoute}${RouteNames.addPageRoute}",
+          name: RouteNamess.addPageRoute,
           page: () => const AddPage(),
           binding: Addbinding(),
         ),
         GetPage(
-          name: "${RouteNames.homePageRoute}${RouteNames.editPageRoute}",
+          name: RouteNamess.editPageRoute,
           page: () => const EditPage(),
           binding: EditBinding(),
         ),

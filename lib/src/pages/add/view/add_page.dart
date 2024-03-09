@@ -16,7 +16,7 @@ class AddPage extends GetView<AddController> {
         backgroundColor: const Color.fromARGB(255, 38, 38, 38),
         leading: IconButton(
             onPressed: () {
-              Get.back();
+              controller.getBack();
             },
             icon: const Icon(
               Icons.arrow_back_ios_new,
@@ -25,19 +25,33 @@ class AddPage extends GetView<AddController> {
       ),
       body: Column(
         children: [
-          _titleTextField(hintText: "Enter id", maxLines: 1),
-          _titleTextField(hintText: "Enter Title", maxLines: 1),
-          _titleTextField(hintText: "Enter Description", maxLines: 24),
-          _addButton(),
+          _titleTextField(
+              hintText: "Enter id",
+              maxLines: 1,
+              controller: controller.userIdController),
+          _titleTextField(
+              hintText: "Enter Title",
+              maxLines: 1,
+              controller: controller.titleController),
+          _titleTextField(
+              hintText: "Enter Description",
+              maxLines: 24,
+              controller: controller.descriptionController),
+          _addButton(onPressed: () => controller.addTodo()),
         ],
       ),
     );
   }
 
-  Widget _titleTextField({required String? hintText, required int? maxLines}) =>
+  Widget _titleTextField({
+    required String? hintText,
+    required int? maxLines,
+    required TextEditingController? controller,
+  }) =>
       Padding(
         padding: const EdgeInsets.all(8),
         child: TextFormField(
+          controller: controller,
           maxLines: maxLines,
           decoration: InputDecoration(
             filled: true,
@@ -50,11 +64,11 @@ class AddPage extends GetView<AddController> {
           ),
         ),
       );
-  Widget _addButton() => Expanded(
+  Widget _addButton({required void Function()? onPressed}) => Expanded(
         child: Padding(
           padding: const EdgeInsets.all(8),
           child: RawMaterialButton(
-            onPressed: () {},
+            onPressed: onPressed,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),

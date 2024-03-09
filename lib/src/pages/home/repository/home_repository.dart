@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:either_dart/either.dart';
 import 'package:http/http.dart' as http;
-import 'package:todo_api/src/infrastructure/routes/common/repository_utils.dart';
+import 'package:todo_api/src/infrastructure/common/repository_utils.dart';
 import 'package:todo_api/src/pages/home/model/todomodel.dart';
 
 class HomeRepository {

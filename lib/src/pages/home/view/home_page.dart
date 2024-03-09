@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:todo_api/src/infrastructure/routes/route_names.dart';
 import 'package:todo_api/src/pages/home/controller/home_controller.dart';
 import 'package:todo_api/src/pages/home/viewmodel/todo_box.dart';
 
@@ -11,7 +10,7 @@ class HomePage extends GetView<HomeController> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.toNamed(RouteNames.addPageRoute);
+          controller.goToAddPage();
         },
         shape: const CircleBorder(),
         backgroundColor: const Color.fromARGB(255, 234, 128, 252),
