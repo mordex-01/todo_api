@@ -32,7 +32,9 @@ class HomePage extends GetView<HomeController> {
             description: controller.rxtodoModelsList[index].description,
             isCompleted: controller.rxtodoModelsList[index].completed,
             onCheckBoxPressed: () {},
-            onEditPressed: () {},
+            onEditPressed: () {
+              controller.goToEditPage(index);
+            },
             onDeletePressed: () {
               controller.deleteItem(index);
             },

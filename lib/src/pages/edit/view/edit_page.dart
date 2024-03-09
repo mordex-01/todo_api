@@ -14,35 +14,62 @@ class EditPage extends GetView<EditController> {
         titleTextStyle: const TextStyle(color: Colors.white, fontSize: 16),
         centerTitle: true,
         backgroundColor: const Color.fromARGB(255, 38, 38, 38),
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.white,
+          ),
+        ),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _titleTextField(hintText: "Enter id", maxLines: 1),
+          _titleTextField(
+              hintText: "Enter id",
+              maxLines: 1,
+              controller: controller.userIdController),
           Row(
             children: [
               Expanded(
                 flex: 5,
-                child: _titleTextField(hintText: "Enter Title", maxLines: 1),
+                child: _titleTextField(
+                    hintText: "Enter Title",
+                    maxLines: 1,
+                    controller: controller.titleController),
               ),
-              Expanded(
-                flex: 1,
-                child: _checkBox(),
+              Obx(
+                () => Expanded(
+                  flex: 1,
+                  child: _checkBox(
+                    valueBool: controller.isChecked,
+                    onPressed: () {
+                      controller.onCheckBoxTapped();
+                    },
+                  ),
+                ),
               )
             ],
           ),
-          _titleTextField(hintText: "Enter Description", maxLines: 24),
-          _addButton(),
+          _titleTextField(
+              hintText: "Enter Description",
+              maxLines: 24,
+              controller: controller.descriptionController),
+          _addButton(onPressed: () {
+            controller.onEditTodo();
+          }),
         ],
       ),
     );
   }
 
-  Widget _addButton() => Expanded(
+  Widget _addButton({required void Function()? onPressed}) => Expanded(
         child: Padding(
           padding: const EdgeInsets.all(8),
           child: RawMaterialButton(
-            onPressed: () {},
+            onPressed: onPressed,
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(25),
@@ -58,21 +85,26 @@ class EditPage extends GetView<EditController> {
           ),
         ),
       );
-  Widget _checkBox() => Container(
-        width: 52,
-        height: 52,
-        decoration:
-            const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
-        child: Checkbox(
-          value: true,
-          onChanged: (value) {},
-          activeColor: Colors.black,
-        ),
-      );
-  Widget _titleTextField({required String? hintText, required int? maxLines}) =>
+  Widget _checkBox(
+          {required Rx<bool> valueBool, required void Function()? onPressed}) =>
+      Container(
+          width: 52,
+          height: 52,
+          decoration:
+              const BoxDecoration(shape: BoxShape.circle, color: Colors.white),
+          child: IconButton(
+              onPressed: onPressed,
+              icon: controller.isChecked.value
+                  ? Icon(Icons.check_box_outlined)
+                  : Icon(Icons.check_box_outline_blank_rounded)));
+  Widget _titleTextField(
+          {required String? hintText,
+          required int? maxLines,
+          required TextEditingController? controller}) =>
       Padding(
         padding: const EdgeInsets.all(8),
         child: TextFormField(
+          controller: controller,
           maxLines: maxLines,
           decoration: InputDecoration(
             filled: true,

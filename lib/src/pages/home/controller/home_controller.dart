@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:either_dart/either.dart';
 import 'package:get/get.dart';
 import 'package:todo_api/src/infrastructure/routes/route_names.dart';
@@ -34,6 +36,22 @@ class HomeController extends GetxController {
     if (result != null) {
       final TodoModel newTodo = TodoModel.fromJson(result);
       rxtodoModelsList.add(newTodo);
+    }
+  }
+
+  Future<void> goToEditPage(int index) async {
+    final dynamic result = await Get.toNamed(
+        "${RouteNamess.homePageRoute}${RouteNamess.editPageRoute}",
+        parameters: {
+          "id": rxtodoModelsList[index].id,
+          "userId": rxtodoModelsList[index].userId,
+          "title": rxtodoModelsList[index].title,
+          "description": rxtodoModelsList[index].description,
+          "completed": rxtodoModelsList[index].completed.toString(),
+        });
+    if (result != null) {
+      final TodoModel newTodo = TodoModel.fromJson(jsonDecode(result));
+      rxtodoModelsList[index] = newTodo;
     }
   }
 

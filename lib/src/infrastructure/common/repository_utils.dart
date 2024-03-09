@@ -3,4 +3,5 @@ class RepositoryUtils {
   static const String getTodos = '/todos';
   static const String addTodos = '/todos';
   static String deleteTodo(String id) => '/todos/$id';
+  static String editTodo(String id) => '/todos/$id';
 }
