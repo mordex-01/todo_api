@@ -26,4 +26,19 @@ class HomeRepository {
       return Left(e.toString());
     }
   }
+
+  Future<Either<String, String>> deleteTodo(String id) async {
+    try {
+      var url =
+          Uri.http(RepositoryUtils.webBaseUrl, RepositoryUtils.deleteTodo(id));
+      final response = await http.delete(url);
+      if (response.statusCode >= 200 && response.statusCode < 400) {
+        return Right(response.body);
+      } else {
+        return Left("${response.statusCode}");
+      }
+    } catch (e) {
+      return Left("$e");
+    }
+  }
 }

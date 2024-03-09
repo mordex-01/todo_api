@@ -36,4 +36,15 @@ class HomeController extends GetxController {
       rxtodoModelsList.add(newTodo);
     }
   }
+
+  deleteItem(int id) {
+    final resultOrExeption = _repository.deleteTodo(rxtodoModelsList[id].id);
+    resultOrExeption.fold(
+      (left) => Get.showSnackbar(GetSnackBar(
+        message: left,
+      )),
+      (right) => rxtodoModelsList
+          .removeWhere((element) => element.id == rxtodoModelsList[id].id),
+    );
+  }
 }
